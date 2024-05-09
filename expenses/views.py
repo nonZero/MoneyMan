@@ -1,3 +1,4 @@
+import calendar
 import random
 
 from django.http import HttpRequest
@@ -7,12 +8,12 @@ from .models import Expense
 
 
 def expense_list(request: HttpRequest):
-    # qs = Expense.objects.all()
+    cal = calendar.HTMLCalendar()
     return render(
         request,
         "expenses/expense_list.html",
         {
-            "nums": [(i, i**2) for i in range(10)],
-            "grays": range(0, 256, 16),
+            "month": cal.formatmonth(2022, 5),
+            "object_list": Expense.objects.order_by("-date")[:20],
         },
     )

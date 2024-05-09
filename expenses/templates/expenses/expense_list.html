@@ -1,18 +1,34 @@
 <h1>
     Expense List
 </h1>
-{% for i, v in nums %}
-	{{ i }}<sup>2</sup> = <b>{{ v }}</b>
-    {% if not forloop.last %}
-        ∫
-    {% endif %}
-{% endfor %}
 
-<hr>
+{#{{ month|safe }}#}
 
-{% for g in grays %}
-    <div style="width:20px;height:20px;background:rgb({{ g }},{{ g }},{{ g }});float:left;"></div>
-{% endfor %}
+<table border="1">
+    <tr>
+        <th>#</th>
+        <th>Amount</th>
+        <th>Title</th>
+        <th>Date</th>
+    </tr>
+    {% for object in object_list %}
+        <tr>
+            <td>
+                #{{ object.id }}
+            </td>
+            <td>
+                ${{ object.amount }}
+                {{ object.is_expensive|yesno:"!,-" }}
+            </td>
+            <td>
+                {{ object.title }}
+            </td>
+            <td>
+                {{ object.date }}
+            </td>
+        </tr>
+    {% endfor %}
 
+</table>
 
 
