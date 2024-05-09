@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "money-man"
+version = "0.1.0"
+description = ""
+authors = ["Udi Oron <udioron@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^5.0.6"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
