@@ -1,0 +1,39 @@
+<h1>
+    Expense List
+</h1>
+<ul>
+    {% for c in colors %}
+        <li>
+            {{ c }}
+        </li>
+    {% endfor %}
+</ul>
+<hr>
+<ul>
+    <li>milk</li>
+    <li>cookies</li>
+    <li>coffee</li>
+</ul>
+<p>
+    The value of n is: {{ n }}
+    {% if n > 20 %}
+        VERY HIGH!!!
+    {% else %}
+        too low......
+    {% endif %}
+</p>
+<p>
+    The value of kuku is: {{ kuku }}
+</p>
+<p>
+    The value of mashu is: {{ mashu }}
+</p>
+<p>
+    The value of p is: {{ p }}
+</p>
+<p>
+    The value of p['name'] is: {{ p.name }}
+</p>
+<p>
+    The value of p['phone'] is: {{ p.phone }}
+</p>
