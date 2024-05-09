@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.urls import path
 
 
@@ -24,16 +24,34 @@ def my_view(request: HttpRequest):
     return HttpResponse("hello <b>world!</b>")
 
 
+def birthday_view(request: HttpRequest, name: str, age: int):
+    return HttpResponse(f"{name} is {age} years old.")
+
+
 def hello_view(request: HttpRequest, name: str):
     return HttpResponse(f"hello {name}!")
+
+
+def color_view(request: HttpRequest, name: str):
+    return HttpResponse(f'<body bgcolor="{name}">{name}</body>')
 
 
 def repeat_view(request: HttpRequest, name: str, times: int):
     return HttpResponse(f"hello {name * times}!")
 
 
+def numbers_view(request: HttpRequest):
+    return JsonResponse({"nums": [1, 2, 3]})
+
+
 urlpatterns = [
     path("", my_view),
+    path("color/<name>/", color_view),
+    path("birthday/<name>/<int:age>/", birthday_view),
+    path("birthday/<int:age>/<name>/", birthday_view),
+    path("old/<name>/", birthday_view, kwargs={"age": 88}),
+    path("young/<name>/", birthday_view, kwargs={"age": 18}),
+    path("nums/", numbers_view),
     path("hello/<name>/", hello_view),
     path("repeat/<name>/<int:times>/", repeat_view),
     path("admin/", admin.site.urls),
