@@ -16,8 +16,25 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.http import HttpRequest, HttpResponse
 from django.urls import path
 
+
+def my_view(request: HttpRequest):
+    return HttpResponse("hello <b>world!</b>")
+
+
+def hello_view(request: HttpRequest, name: str):
+    return HttpResponse(f"hello {name}!")
+
+
+def repeat_view(request: HttpRequest, name: str, times: int):
+    return HttpResponse(f"hello {name * times}!")
+
+
 urlpatterns = [
+    path("", my_view),
+    path("hello/<name>/", hello_view),
+    path("repeat/<name>/<int:times>/", repeat_view),
     path("admin/", admin.site.urls),
 ]
