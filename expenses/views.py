@@ -3,26 +3,31 @@ import datetime
 from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404
 
+from .forms import SearchForm
 from .models import Expense
 
 
 def expense_list(request: HttpRequest):
     qs = Expense.objects.order_by("-date")
 
-    if q := request.GET.get('q', ''):
-        qs = qs.filter(title__icontains=q)
+    form = SearchForm(request.GET if request.GET else None)
 
-    if recent_only := request.GET.get('recent_only', '') == "on":
-        d = datetime.date.today() - datetime.timedelta(days=90)
-        qs = qs.filter(date__gte=d)
+    if form.is_valid():
+        d = form.cleaned_data
+        if d['q']:
+            qs = qs.filter(title__icontains=d['q'])
+        if d['recent_only']:
+            day = datetime.date.today() - datetime.timedelta(days=90)
+            qs = qs.filter(date__gte=day)
+        qs = qs.order_by(d['sort_field'])
+
 
     return render(
         request,
         "expenses/expense_list.html",
         {
             "object_list": qs[:20],
-            "q": q,
-            "recent_only": recent_only,
+            "form": form,
         },
     )
 

@@ -3,11 +3,10 @@
 </h1>
 
 <form>
-    <input type="search" name="q" value="{{ q }}"/>
-    <label>
-        <input type="checkbox" name="recent_only" {% if recent_only %} checked {% endif %}>
-        Recent Only
-    </label>
+    <ul>
+        {{ form.as_ul }}
+    </ul>
+    <input type="hidden">
     <button>Search</button>
 </form>
 
