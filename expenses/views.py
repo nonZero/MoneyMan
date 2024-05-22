@@ -46,7 +46,7 @@ def expense_create(request: HttpRequest):
     if request.method == "POST":
         form = forms.ExpenseForm(request.POST)
         if form.is_valid():
-            d = form.cleaned_data
+            # d = form.cleaned_data
             # o = Expense(**d)
             # o.save()
             o = form.save()
