@@ -1,11 +1,22 @@
-<h1>
-    Create Expense
-</h1>
+{% extends "base.html" %}
+{% load static %}
+{% load django_bootstrap5 %}
 
-<form method="post">
-    <ul>
+
+{% block title %}
+    Expense: {{ object }}
+{% endblock %}
+
+
+
+{% block content %}
+    <h1>
+        Create Expense
+    </h1>
+
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_ul }}
-    </ul>
-    <button>Create</button>
-</form>
+        {% bootstrap_form form %}
+        {% bootstrap_button "Create" %}
+    </form>
+{% endblock %}

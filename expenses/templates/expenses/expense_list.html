@@ -1,44 +1,52 @@
-<h1>
+{% extends "base.html" %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+
+{% block title %}
     Expense List
-</h1>
+{% endblock %}
 
-<form>
-    <ul>
-        {{ form.as_ul }}
-    </ul>
-    <input type="hidden">
-    <button>Search</button>
-</form>
 
-<table border="1">
-    <tr>
-        <th>#</th>
-        <th>Amount</th>
-        <th>Category</th>
-        <th>Title</th>
-        <th>Date</th>
-    </tr>
-    {% for object in object_list %}
+
+{% block content %}
+    <h1 class="relevant">
+        Expense List
+    </h1>
+
+    <form class="inline">
+        {% bootstrap_form form layout='inline' %}
+        {% bootstrap_button "Search" %}
+    </form>
+
+    <table class="table table-hover table-striped">
         <tr>
-            <td>
-                <a href="{{ object.get_absolute_url }}">#{{ object.id }}</a>
-            </td>
-            <td>
-                ${{ object.amount }}
-                {{ object.is_expensive|yesno:"!,-" }}
-            </td>
-            <td>
-                {{ object.category }}
-            </td>
-            <td>
-                {{ object.title }}
-            </td>
-            <td>
-                {{ object.date }}
-            </td>
+            <th>#</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Date</th>
         </tr>
-    {% endfor %}
+        {% for object in object_list %}
+            <tr>
+                <td>
+                    <a href="{{ object.get_absolute_url }}">#{{ object.id }}</a>
+                </td>
+                <td>
+                    ${{ object.amount }}
+                    {{ object.is_expensive|yesno:"!,-" }}
+                </td>
+                <td>
+                    {{ object.category }}
+                </td>
+                <td class="relevant bigger">
+                    {{ object.title }}
+                </td>
+                <td>
+                    {{ object.date }}
+                </td>
+            </tr>
+        {% endfor %}
 
-</table>
-
-
+    </table>
+{% endblock %}

@@ -1,13 +1,26 @@
-<h1>
-    [#{{ object.id }}] {{ object.title }}
-</h1>
+{% extends "base.html" %}
+{% load static %}
 
-<p>
-    Amount: {{ object.amount }}
-</p>
 
-{{ object.description|linebreaks }}
+{% block title %}
+    Expense: {{ object }}
+{% endblock %}
 
-<hr/>
 
-<a href="{% url "expenses:list" %}">Back to all expenses</a>
+
+{% block content %}
+
+    <h1>
+        [#{{ object.id }}] {{ object.title }}
+    </h1>
+
+    <p>
+        Amount: {{ object.amount }}
+    </p>
+
+    {{ object.description|linebreaks }}
+
+    <hr/>
+
+    <a href="{% url "expenses:list" %}">Back to all expenses</a>
+{% endblock %}

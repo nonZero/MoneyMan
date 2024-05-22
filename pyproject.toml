@@ -13,6 +13,7 @@ ipython = "^8.24.0"
 faker = "^25.1.0"
 django-extensions = "^3.2.3"
 tqdm = "^4.66.4"
+django-bootstrap5 = "^24.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
