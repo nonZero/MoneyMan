@@ -19,7 +19,10 @@ def expense_list(request: HttpRequest):
         if d['recent_only']:
             day = datetime.date.today() - datetime.timedelta(days=90)
             qs = qs.filter(date__gte=day)
+        if d['category']:
+            qs = qs.filter(category=d['category'])
         qs = qs.order_by(d['sort_field'])
+
 
 
     return render(
