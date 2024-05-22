@@ -5,11 +5,16 @@ from .models import Expense
 
 
 def expense_list(request: HttpRequest):
+    qs = Expense.objects.order_by("-date")
+
+    if q := request.GET.get('q'):
+        qs = qs.filter(title__icontains=q)
+
     return render(
         request,
         "expenses/expense_list.html",
         {
-            "object_list": Expense.objects.order_by("-date")[:20],
+            "object_list": qs[:20],
         },
     )
 
