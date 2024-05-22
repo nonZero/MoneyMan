@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # ORM: Object Relational Mapper
@@ -13,5 +14,10 @@ class Expense(models.Model):
     def __str__(self):
         return f"[#{self.id}] {self.amount} @ {self.date} {self.title}"
 
+    def get_absolute_url(self):
+        return reverse("expenses:detail", args=(self.id,))
+
     def is_expensive(self):
         return self.amount > 25
+
+
