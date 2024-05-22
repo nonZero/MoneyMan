@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -7,8 +8,10 @@ from . import forms
 from .models import Expense
 
 
+@login_required
 def expense_list(request: HttpRequest):
     qs = Expense.objects.order_by("-date")
+    qs = qs.filter(user=request.user)
 
     form = forms.SearchForm(request.GET if request.GET else None)
 
@@ -35,16 +38,18 @@ def expense_list(request: HttpRequest):
     )
 
 
+@login_required
 def expense_detail(request: HttpRequest, id: int):
     return render(
         request,
         "expenses/expense_detail.html",
         {
-            "object": get_object_or_404(Expense, id=id),
+            "object": get_object_or_404(Expense, id=id, user=request.user),
         },
     )
 
 
+@login_required
 def expense_create(request: HttpRequest):
     if request.method == "POST":
         form = forms.ExpenseForm(request.POST)
@@ -52,6 +57,7 @@ def expense_create(request: HttpRequest):
             # d = form.cleaned_data
             # o = Expense(**d)
             # o.save()
+            form.instance.user = request.user
             o = form.save()
             # TODO: show success message
             return redirect(o)

@@ -14,7 +14,7 @@
         Expense List
     </h1>
 
-    <form class="inline">
+    <form class="row row-cols-lg-auto g-3 align-items-center mb-2">
         {% bootstrap_form form layout='inline' %}
         {% bootstrap_button "Search" %}
     </form>
@@ -40,7 +40,7 @@
                     {{ object.category }}
                 </td>
                 <td class="relevant bigger">
-                    {{ object.title }}
+                    {{ object.title }} ({{ object.user }})
                 </td>
                 <td>
                     {{ object.date }}

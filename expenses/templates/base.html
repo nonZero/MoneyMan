@@ -27,6 +27,16 @@
            href="{% url "expenses:list" %}">
             MoneyMan
         </a>
+        <span class="navbar-text">
+          {{ user }}
+        </span>
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url "logout" %}">
+                {% csrf_token %}
+                <button>Logout</button>
+            </form>
+
+        {% endif %}
         <button class="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -15,8 +16,8 @@ class Category(models.Model):
         return self.name[0]
 
 
-
 class Expense(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='expenses')
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='expenses')
     title = models.CharField(max_length=500)
     amount = models.DecimalField(decimal_places=2, max_digits=12)
