@@ -5,16 +5,8 @@
 <form>
     <input type="search" name="q" value="{{ q }}"/>
     <label>
-        <input type="checkbox" name="toppings" value="1">
-        Cream
-    </label>
-    <label>
-        <input type="checkbox" name="toppings" value="2">
-        Candy
-    </label>
-    <label>
-        <input type="checkbox" name="toppings" value="3">
-        Sirup
+        <input type="checkbox" name="recent_only" {% if recent_only %} checked {% endif %}>
+        Recent Only
     </label>
     <button>Search</button>
 </form>
