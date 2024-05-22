@@ -1,0 +1,11 @@
+<h1>
+    Create Expense
+</h1>
+
+<form method="post">
+    <ul>
+        {% csrf_token %}
+        {{ form.as_ul }}
+    </ul>
+    <button>Create</button>
+</form>
