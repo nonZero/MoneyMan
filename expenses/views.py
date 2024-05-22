@@ -7,7 +7,7 @@ from .models import Expense
 def expense_list(request: HttpRequest):
     qs = Expense.objects.order_by("-date")
 
-    if q := request.GET.get('q'):
+    if q := request.GET.get('q', ''):
         qs = qs.filter(title__icontains=q)
 
     return render(
@@ -15,6 +15,7 @@ def expense_list(request: HttpRequest):
         "expenses/expense_list.html",
         {
             "object_list": qs[:20],
+            "q": q,
         },
     )
 
