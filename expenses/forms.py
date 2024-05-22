@@ -18,6 +18,7 @@ class ExpenseForm(forms.ModelForm):
     class Meta:
         model = models.Expense
         fields = (
+            'category',
             'amount',
             'title',
             'date',

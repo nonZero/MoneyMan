@@ -11,10 +11,13 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def first_letter(self):
+        return self.name[0]
+
 
 
 class Expense(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='expenses')
     title = models.CharField(max_length=500)
     amount = models.DecimalField(decimal_places=2, max_digits=12)
     date = models.DateField()
