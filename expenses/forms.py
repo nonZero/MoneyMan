@@ -1,4 +1,5 @@
 from django import forms
+from django_flatpickr.widgets import DatePickerInput
 
 from . import models
 from .models import Category
@@ -25,5 +26,6 @@ class ExpenseForm(forms.ModelForm):
             'date',
             'description',
         )
-
-
+        widgets = {
+            'date': DatePickerInput(),
+        }
