@@ -24,9 +24,10 @@ def expense_list(request: HttpRequest):
             qs = qs.filter(date__gte=day)
         if d['category']:
             qs = qs.filter(category=d['category'])
-        qs = qs.order_by(d['sort_field'])
-
-
+        qs = qs.order_by("-" + d['sort_field'])
+        # the next two lines disables displaying the form validation css classes.
+        form.initial = form.cleaned_data
+        form.is_bound = False
 
     return render(
         request,
@@ -72,4 +73,3 @@ def expense_create(request: HttpRequest):
             "form": form,
         },
     )
-

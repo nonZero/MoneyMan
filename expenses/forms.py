@@ -10,10 +10,9 @@ class SearchInput(forms.TextInput):
 
 class SearchForm(forms.Form):
     q = forms.CharField(required=False, label="", widget=SearchInput)
-    recent_only = forms.BooleanField(required=False)
-    minimum_price = forms.IntegerField(initial=10, required=False)
-    sort_field = forms.ChoiceField(choices=[('date', 'Date'), ('amount', 'Price')])
     category = forms.ModelChoiceField(Category.objects.all(), required=False)
+    recent_only = forms.BooleanField(required=False, label="Only from the last 90 days")
+    sort_field = forms.ChoiceField(choices=[('date', 'Date'), ('amount', 'Price')])
 
 
 class ExpenseForm(forms.ModelForm):
