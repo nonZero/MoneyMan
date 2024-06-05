@@ -10,9 +10,19 @@
 
 {% block content %}
 
+    <div class="float-end">
+
+        <a class="btn btn-primary"
+           href="{% url 'expenses:update' object.id %}">Edit</a>
+        <a class="btn btn-danger"
+           href="{% url 'expenses:delete' object.id %}">Delete</a>
+
+    </div>
+
     <h1>
         [#{{ object.id }}] {{ object.title }} {{ object.user }}
     </h1>
+
 
     <p>
         Amount: {{ object.amount }}

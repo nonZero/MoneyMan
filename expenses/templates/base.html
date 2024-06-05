@@ -1,3 +1,4 @@
+{% load django_bootstrap5 %}
 {% load static %}
 
 <!doctype html>
@@ -18,7 +19,7 @@
           href="{% static 'style.css' %}">
 </head>
 <body>
-<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary"
+<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary mb-2"
      data-bs-theme="dark">
 
 
@@ -85,6 +86,8 @@
 </nav>
 
 <div class="container-fluid">
+
+    {% bootstrap_messages %}
 
     {% block content %}NO CONTENT{% endblock %}
 

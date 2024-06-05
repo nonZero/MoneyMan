@@ -4,24 +4,22 @@
 
 
 {% block title %}
-    Expense: {{ object }}
+    Delete '{{ object.title }}'
 {% endblock %}
 
 
 
 {% block content %}
     <h1>
-    {% if object %}
-        Update '{{ object.title }}'
-    {% else %}
-        Create Expense
-    {% endif %}
+        Delete '{{ object.title }}'?
     </h1>
-
+    <p>
+    Are you sure?
+    </p>
     <form method="post">
         {% csrf_token %}
-        {% bootstrap_form form %}
-        {% bootstrap_button object.id|yesno:"Update,Create" %}
+{#        {% bootstrap_form form %}#}
+        {% bootstrap_button "Delete" %}
     </form>
     {{ form.media }}
 {% endblock %}
