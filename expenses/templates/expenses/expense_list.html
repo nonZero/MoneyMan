@@ -15,7 +15,7 @@
     </h1>
 
     <form class="row row-cols-lg-auto g-3 align-items-center mb-2">
-        {% bootstrap_form form layout='inline' %}
+        {% bootstrap_form view.form layout='inline' %}
         {% bootstrap_button "Search" %}
     </form>
 
@@ -47,6 +47,7 @@
                 </td>
             </tr>
         {% endfor %}
-
     </table>
+
+    {% bootstrap_pagination page_obj %}
 {% endblock %}
