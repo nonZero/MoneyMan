@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
 {% load static %}
 
 
@@ -6,12 +7,11 @@
     Expense: {{ object }}
 {% endblock %}
 
-
-
 {% block content %}
 
     <div class="float-end">
 
+    {% include "expenses/_expense_star.html" %}
         <a class="btn btn-primary"
            href="{% url 'expenses:update' object.id %}">Edit</a>
         <a class="btn btn-danger"
@@ -33,4 +33,5 @@
     <hr/>
 
     <a href="{% url "expenses:list" %}">Back to all expenses</a>
+
 {% endblock %}

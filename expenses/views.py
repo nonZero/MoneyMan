@@ -2,6 +2,7 @@ import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 
@@ -17,7 +18,7 @@ class ExpenseMixin(LoginRequiredMixin):
 
 
 class ExpenseListView(ExpenseMixin, ListView):
-    paginate_by = 10
+    paginate_by = 50
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -44,7 +45,11 @@ class ExpenseListView(ExpenseMixin, ListView):
 
 
 class ExpenseDetailView(ExpenseMixin, DetailView):
-    pass
+    def post(self, request, *args, **kwargs):
+        o = self.get_object()
+        o.is_star = not o.is_star
+        o.save()
+        return redirect(o)
 
 
 class ExpenseCreateView(ExpenseMixin, SuccessMessageMixin, CreateView):

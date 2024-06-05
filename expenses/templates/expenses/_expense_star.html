@@ -1,0 +1,10 @@
+<form class="d-inline"
+      hx-post="{{ object.get_absolute_url }}"
+      id="star-button-{{ object.id }}"
+      hx-swap-oob="true">
+    {% csrf_token %}
+    <button class="btn">
+        <i class="bi bi-{{ object.is_star|yesno:"star-fill,star" }}"></i>
+    </button>
+
+</form>
