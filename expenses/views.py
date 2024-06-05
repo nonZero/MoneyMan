@@ -66,24 +66,3 @@ class ExpenseDeleteView(ExpenseMixin, SuccessMessageMixin, DeleteView):
 
     def get_success_message(self, cleaned_data):
         return f"Expense #{self.kwargs['pk']} deleted."
-
-
-# @login_required
-# def expense_create(request: HttpRequest):
-#     if request.method == "POST":
-#         form = forms.ExpenseForm(request.POST)
-#         if form.is_valid():
-#             form.instance.user = request.user
-#             o = form.save()
-#             messages.success(request, f"Expense #{o.id} created.")
-#             return redirect(o)
-#     else:
-#         form = forms.ExpenseForm()
-#
-#     return render(
-#         request,
-#         "expenses/expense_form.html",
-#         {
-#             "form": form,
-#         },
-#     )
