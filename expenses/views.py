@@ -1,9 +1,10 @@
 import datetime
+import time
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 
 from . import forms
@@ -46,6 +47,7 @@ class ExpenseListView(ExpenseMixin, ListView):
 
 class ExpenseDetailView(ExpenseMixin, DetailView):
     def post(self, request, *args, **kwargs):
+        time.sleep(2)
         o = self.get_object()
         o.is_star = not o.is_star
         o.save()
