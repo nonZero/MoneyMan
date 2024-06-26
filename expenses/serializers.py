@@ -18,21 +18,31 @@ class ExpenseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Expense
-        fields = "__all__"
-        # exclude = [
-        #     'title',
-        # ]
+        fields = [
+            "id",
+            "url",
+            "user",
+            "category",
+            "title",
+            "amount",
+            "date",
+            "description",
+            "is_star",
+        ]
 
     def get_foo(self, instance):
         return "!!!"
+
+
+print(ExpenseSerializer())
 
 
 class ShortExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Expense
         fields = [
-            'title',
-            'amount',
+            "title",
+            "amount",
         ]
 
     def get_foo(self, instance):
