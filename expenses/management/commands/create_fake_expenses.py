@@ -23,6 +23,9 @@ class Command(BaseCommand):
         parser.add_argument("--delete", action="store_true")
 
     def handle(self, n, delete, *args, **options):
+
+        # User.objects.create_superuser("sysop", password="sysop")
+
         if delete:
             Expense.objects.all().delete()
 

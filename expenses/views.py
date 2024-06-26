@@ -3,12 +3,15 @@ import time
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 
 from . import forms
 from .models import Expense
+from .serializers import ExpenseSerializer
 
 
 class ExpenseMixin(LoginRequiredMixin):
@@ -16,6 +19,13 @@ class ExpenseMixin(LoginRequiredMixin):
 
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
+
+
+class MyView(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        qs = Expense.objects.filter(user=self.request.user)
+        return JsonResponse({
+            "items": ExpenseSerializer(instance=qs, many=True).data, })
 
 
 class ExpenseListView(ExpenseMixin, ListView):

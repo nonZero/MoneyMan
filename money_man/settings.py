@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "django_bootstrap5",
     "django_flatpickr",
+    "rest_framework",
     # my apps:
     "expenses",
 ]
@@ -112,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Jerusalem"
 
 USE_I18N = True
 
